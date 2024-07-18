@@ -463,13 +463,14 @@ class UptimeKumaApi(object):
             timeout: float = 10,
             headers: dict = None,
             ssl_verify: bool = True,
-            wait_events: float = 0.2
+            wait_events: float = 0.2,
+            http_session: requests.Session = None
     ) -> None:
         self.url = url.rstrip("/")
         self.timeout = timeout
         self.headers = headers
         self.wait_events = wait_events
-        self.sio = socketio.Client(ssl_verify=ssl_verify)
+        self.sio = socketio.Client(ssl_verify=ssl_verify, http_session=http_session)
 
         self._event_data: dict = {
             Event.MONITOR_LIST: None,
